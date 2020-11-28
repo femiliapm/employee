@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee</title>
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet"
+    href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" th:href="@{/assets/plugins/fontawesome-free/css/all.min.css}">
+  <!-- Theme style -->
+  <link rel="stylesheet" th:href="@{/assets/dist/css/adminlte.min.css}">
+  <!-- DataTables -->
+  <link rel="stylesheet" th:href="@{/assets/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css}">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+  <div class="wrapper">
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left Navbar -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a href="#" class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">Home</a>
+        </li>
+        <li class="nav-item d-none d-sm-inline-block">
+          <a href="#" class="nav-link">Contact</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Main Sidebar -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+      <!-- Logo -->
+      <a href="#" class="brand-link">
+        <span class="brand-text font-weight-light">Employee</span>
+      </a>
+
+      <!-- Sidebar -->
+      <div class="sidebar">
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+            <li class="nav-item">
+              <a href="#" class="nav-link active">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                  Employee Data
+                </p>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Content Wrapper -->
+    <div class="content-wrapper">
+      <!-- Page Header -->
+      <div class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <h1 class="m-0">Employee Data</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="card-title">Profile</h3>
+                  <div class="card-body table-responsive">
+                    <table class="table table-borderless" id="table-data-employee" style="width: 100%;"></table>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="card-body">
+              <form action="#" id="employee">
+                <div class="form-group">
+                  <div class="row">
+                    <label class="control-label col-sm-2" for="employeeCode"><strong>Employee Code:</strong></label>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" name="employeeCode" id="employeeCode" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-2">
+                      <label class="control-label" for="employeeName"><strong>Employee Name:</strong></label>
+                    </div>
+                    <div class="col-sm-10">
+                      <input class="form-control" type="text" name="employeeName" id="employeeName" disabled>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12 col-sm-12">
+              <div class="card card-tabs">
+                <div class="card-header p-0 pt-1">
+                  <ul class="nav nav-tabs">
+                    <li class="nav-item">
+                      <a href="#organisation" class="nav-link active" data-toggle="pill" role="tab">Organisation</a>
+                    </li>
+                    <li class="nav-item">
+                      <a href="#position" class="nav-link" data-toggle="pill" role="tab">Position</a>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="card-body">
+                  <div class="tab-content">
+                    <div class="tab-pane fade show active" id="organisation" role="tabpanel">
+                      <div class="row">
+                        <!-- <h1>test card-body organisation</h1><br> -->
+                        <button class="btn btn-outline-primary" type="button" id="btn-add-organisation">Add</button>
+                        <button class="btn btn-outline-danger" type="button">Delete</button>
+                      </div>
+                      <div class="row table-responsive">
+                        <!-- <h2>disini tablenya</h2> -->
+                        <table class="table table-borderless" id="table-data-organisation" style="width: 100%;"></table>
+                      </div>
+                    </div>
+
+                    <div class="tab-pane fade show" id="position" role="tabpanel">
+                      <div class="row">
+                        <!-- <h1>test card-body Position</h1> -->
+                        <button class="btn btn-outline-primary" type="button" id="btn-add-position">Add</button>
+                        <button class="btn btn-outline-danger" type="button">Delete</button>
+                      </div>
+                      <div class="row table-responsive">
+                        <table class="table table-borderless" id="table-data-position" style="width: 100%;"></table>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form Employee -->
+    <div class="modal fade" id="modal-employee">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Form Employee</h4>
+            <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form action="#" id="form-employee" role="form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="employeeCode">Employee Code:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-employeeCode" name="employeeCode" disabled>
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="employeeName">Employee Name:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-employeeName" name="employeeName">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="status">Status:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-status" name="status">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer justify-content-between">
+            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            <button class="btn btn-primary" id="btn-save" type="button">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal detail -->
+    <div class="modal fade" id="modal-detail-employee">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Detail Employee</h4>
+            <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <div class="row">
+              <form action="#" id="detail-employee">
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label class="control-label" for="employeeCode"><strong>Employee Code:</strong></label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="text" name="employeeCode" id="detail-employeeCode" disabled>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <label class="control-label" for="employeeName"><strong>Employee Name:</strong></label>
+                    </div>
+                    <div class="col-sm-9">
+                      <input class="form-control" type="text" name="employeeName" id="detail-employeeName" disabled>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+
+            <div class="row">
+              <div class="col-12 col-sm-12">
+                <div class="card card-tabs">
+                  <div class="card-header p-0 pt-1">
+                    <ul class="nav nav-tabs">
+                      <li class="nav-item">
+                        <a href="#detail-organisation" class="nav-link active" data-toggle="pill"
+                          role="tab">Organisation</a>
+                      </li>
+                      <li class="nav-item">
+                        <a href="#detail-position" class="nav-link" data-toggle="pill" role="tab">Position</a>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div class="card-body">
+                    <div class="tab-content">
+                      <div class="tab-pane fade show active" id="detail-organisation" role="tabpanel">
+                        <div class="row">
+                          <button class="btn btn-outline-primary" type="button">Add</button>
+                          <button class="btn btn-outline-danger" type="button">Delete</button>
+                        </div>
+                        <div class="row table-responsive">
+                          <table class="table table-borderless" id="table-data-detail-organisation"
+                            style="width: 100%;"></table>
+                        </div>
+                      </div>
+
+                      <div class="tab-pane fade show" id="detail-position" role="tabpanel">
+                        <div class="row">
+                          <button class="btn btn-outline-primary" type="button">Add</button>
+                          <button class="btn btn-outline-danger" type="button">Delete</button>
+                        </div>
+                        <div class="row table-responsive">
+                          <table class="table table-borderless" id="table-data-detail-position" style="width: 100%;">
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form Organisation -->
+    <div class="modal fade" id="modal-organisation">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Form Organisation</h4>
+            <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form action="#" id="form-organisation" role="form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="organisationCode">Organisation Code:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-organisationCode" name="organisationCode">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="validFromOrganisation">Valid From:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-validFromOrganisation" name="validFromOrganisation">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="validToOrganisation">Valid To:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-validToOrganisation" name="validToOrganisation">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer justify-content-between">
+            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            <button class="btn btn-primary" id="btn-save-organisation" type="button">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Form Position -->
+    <div class="modal fade" id="modal-position">
+      <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Form Position</h4>
+            <button class="close" aria-label="Close" data-dismiss="modal" type="button">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+
+          <div class="modal-body">
+            <form action="#" id="form-position" role="form">
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="positionName">Position Name:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-positionName" name="positionName">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="validFromPosition">Valid From:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-validFromPosition" name="validFrom">
+                  </div>
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <label for="validToPosition">Valid To:</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="text" class="form-control" id="form-validToPosition" name="validTo">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div class="modal-footer justify-content-between">
+            <button class="btn btn-default" data-dismiss="modal" type="button">Close</button>
+            <button class="btn btn-primary" id="btn-save" type="button">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- jQuery -->
+  <script th:src="@{/assets/plugins/jquery/jquery.min.js}"></script>
+  <script th:src="@{/assets/js/default.js}"></script>
+  <!-- Bootstrap 4 -->
+  <script th:src="@{/assets/plugins/bootstrap/js/bootstrap.bundle.min.js}"></script>
+  <!-- AdminLTE App -->
+  <script th:src="@{/assets/dist/js/adminlte.min.js}"></script>
+  <!-- DataTables -->
+  <script th:src="@{/assets/plugins/datatables/jquery.dataTables.js}"></script>
+  <script th:src="@{/assets/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js}"></script>
+  <script th:src="@{/assets/js/index.js}"></script>
+
+  <script>
+    tableDataEmployee.create();
+    dataEmployee.create(1);
+    tableDataOrganisation.create(1);
+    tableDataPosition.create(1);
+
+    $('#btn-add-organisation').click(function () {
+      $('#modal-organisation').modal('show')
+    })
+
+    $('#btn-save-organisation').click(function () {
+      $('modal-organisation').modal('hide')
+      formOrganisation.saveForm()
+    })
+
+    $('#btn-add-position').click(function () {
+      $('#modal-position').modal('show')
+    })
+  </script>
+
+</body>
+
+</html>
